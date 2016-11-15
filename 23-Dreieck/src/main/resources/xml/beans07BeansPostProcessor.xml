@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="dreieck" class="edu.spring.dreieck.xml.beanspostprocessor.Dreieck">
+		<property name="punkte">
+			<list>
+				<ref bean="punktA" />
+				<ref bean="punktB" />
+			</list>
+		</property>
+	</bean>
+	<bean id="punktA" class="edu.spring.dreieck.xml.beanspostprocessor.Punkt">
+		<property name="x" value="1"></property>
+		<property name="y" value="1"></property>
+	</bean>
+	<bean id="punktB" class="edu.spring.dreieck.xml.beanspostprocessor.Punkt">
+		<property name="x" value="2" />
+		<property name="y" value="2" />
+	</bean>
+	<bean class="edu.spring.dreieck.xml.beanspostprocessor.InitDreieckApp" />
+	
+	
+
+</beans>

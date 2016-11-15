@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+	<bean id="dreieck" class="edu.spring.dreieck.xml.basics.Dreieck">
+		<property name="start" ref="startPunkt"></property>
+	</bean>
+	<bean id="startPunkt" class="edu.spring.dreieck.xml.basics.Punkt">
+		<property name="x" value="0"></property>
+		<property name="y" value="1"></property>
+	</bean>
+
+ </beans>

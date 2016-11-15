@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="A3" class="edu.spring.auto03.model.Auto">
+		<property name="name" value="A3"></property>
+		<property name="reifen">
+			<list>
+				<bean class="edu.spring.auto03.model.Reifen" />
+				<bean class="edu.spring.auto03.model.Reifen" />
+				<bean class="edu.spring.auto03.model.Reifen" />
+				<bean class="edu.spring.auto03.model.Reifen" />
+
+			</list>
+		</property>
+		<property name="motor" ref="a3_motor" />
+		<property name="kraftstoff" ref="benzin" />
+	</bean>
+	<bean id="a3_motor" class="edu.spring.auto03.model.Motor" autowire="byName" />
+	<bean id="benzin" class="edu.spring.auto03.model.fuel.Benzin" scope="prototype" />
+	<bean id="oel" class="edu.spring.auto03.model.Oel" scope="prototype" />
+
+</beans>
