@@ -3,7 +3,7 @@ Spring Tutorial Dependency Injection
 
 ## Version
 
-spring frame work version: 5.2.7.RELEASE
+Spring frame work version: 5.2.7.RELEASE
 
 
 ## Project 21 Auto
@@ -12,7 +12,7 @@ The tutorial project shows three options on how to work with instantiate new obj
 
 - option 1: Auto creates _Benzin_
 - option 2: Benzin is created outside of _Auto_
-- option 3: using dependency injection by the file _resources/beans03.xml_
+- option 3: using dependency injection. The beans are defined the file _resources/beans03.xml_
 ```xml
 	<bean id="A3" class="edu.spring.auto03.model.Auto">
 		<property name="name" value="A3"></property>
@@ -56,7 +56,7 @@ The _InitializingBean_ and _DisposableBean_ are explained in _Lifecyle Events_. 
 
 All beans are under _resources/xml_:
 
-- 01 Basics: Initialize Dreieck and Punkt individually. Link the Point into Dreieck with a _ref_.
+- **01 Basics**: Initialize Dreieck and Punkt individually. Link the Point into Dreieck with a _ref_.
 ```xml
 	<bean id="dreieck" class="edu.spring.dreieck.xml.basics.Dreieck">
 		<property name="start" ref="startPunkt"></property>
@@ -67,23 +67,114 @@ All beans are under _resources/xml_:
 	</bean>
 ```
 
-- 01 Basics inner: Initialize Dreieck and Punkt all together in Dreieck.
+- **01 Basics inner**: Initialize Dreieck and Punkt all together in Dreieck.
 ```xml
+  <bean id="dreieck" class="edu.spring.dreieck.xml.basics.Dreieck">
+     <property name="start">
+       <bean id="startPunkt" class="edu.spring.dreieck.xml.basics.Punkt">
+         <property name="x" value="0"></property>
+         <property name="y" value="1"></property>
+       </bean>
+     </property>
+  </bean>
 ```
-- 02 Collection: Initialize Dreieck and Punkt as a list.
+- **02 Collection**: Initialize Dreieck and Punkt as a list.
 ```xml
+	<bean id="dreieck" class="edu.spring.dreieck.xml.collection.Dreieck">
+		<property name="punkte">
+			<list>
+				<ref bean="punkt1" />
+				<ref bean="punkt2" />
+			</list>
+		</property>
+	</bean>
+	<bean id="punkt1" class="edu.spring.dreieck.xml.collection.Punkt">
+		<property name="x" value="1"></property>
+		<property name="y" value="1"></property>
+	</bean>
+	<bean id="punkt2" class="edu.spring.dreieck.xml.collection.Punkt">
+		<property name="x" value="2" />
+		<property name="y" value="2" />
+	</bean>
 ```
-- 04 Inheritance: Inherit a second point and initialize it with a different point.
+- **04 Inheritance**: Inherit a second point and initialize it with a different point.
 ```xml
+	<bean id="dreieck" class="edu.spring.dreieck.xml.inheritance.Dreieck">
+		<property name="punktA" ref="punktA" />
+	</bean>
+
+	<bean id="dreieck2" class="edu.spring.dreieck.xml.inheritance.Dreieck2" parent="dreieck">
+		<property name="punktB" ref="punktB" />
+	</bean>
+
+	<bean id="punktA" class="edu.spring.dreieck.xml.inheritance.Punkt">
+		<property name="x" value="1"></property>
+		<property name="y" value="1"></property>
+	</bean>
+
+	<bean id="punktB" class="edu.spring.dreieck.xml.inheritance.Punkt">
+		<property name="x" value="2" />
+		<property name="y" value="2" />
+	</bean>
 ```
-- 05 Aware Interfaces: _BeanNameAware_ and _ApplicationContextAware_ for getting the own bean name and the application context.
+- **05 Aware Interfaces**: _BeanNameAware_ and _ApplicationContextAware_ for getting the own bean name and the application context.
 ```xml
+	<bean id="dreieck" class="edu.spring.dreieck.xml.awareinterfaces.Dreieck">
+		<property name="punkte">
+			<list>
+				<ref bean="punktA" />
+				<ref bean="punktB" />
+			</list>
+		</property>
+	</bean>
+	<bean id="punktA" class="edu.spring.dreieck.xml.awareinterfaces.Punkt">
+		<property name="x" value="1"></property>
+		<property name="y" value="1"></property>
+	</bean>
+	<bean id="punktB" class="edu.spring.dreieck.xml.awareinterfaces.Punkt">
+		<property name="x" value="2" />
+		<property name="y" value="2" />
+	</bean>
 ```
-- 06 Lifecyle Events: Shows _custom init_ and _destroy_ methods through _InitializingBean_ and _DisposableBean_.
+- **06 Lifecyle Events**: Shows _custom init_ and _destroy_ methods through _InitializingBean_ and _DisposableBean_.
 ```xml
+	<bean id="dreieck" class="edu.spring.dreieck.xml.lifecycleevents.Dreieck" 
+	   init-method="init" destroy-method="mydestroy">
+		<property name="punkte">
+			<list>
+				<ref bean="punktA" />
+				<ref bean="punktB" />
+			</list>
+		</property>
+	</bean>
+	<bean id="punktA" class="edu.spring.dreieck.xml.lifecycleevents.Punkt">
+		<property name="x" value="1"></property>
+		<property name="y" value="1"></property>
+	</bean>
+	<bean id="punktB" class="edu.spring.dreieck.xml.lifecycleevents.Punkt">
+		<property name="x" value="2" />
+		<property name="y" value="2" />
+	</bean>
 ```
-- 07 Beans Post Processor: Initialize the beans programmatically in a separate class.
+- **07 Beans Post Processor**: Initialize the beans programmatically in a separate class.
 ```xml
+	<bean id="dreieck" class="edu.spring.dreieck.xml.beanspostprocessor.Dreieck">
+		<property name="punkte">
+			<list>
+				<ref bean="punktA" />
+				<ref bean="punktB" />
+			</list>
+		</property>
+	</bean>
+	<bean id="punktA" class="edu.spring.dreieck.xml.beanspostprocessor.Punkt">
+		<property name="x" value="1"></property>
+		<property name="y" value="1"></property>
+	</bean>
+	<bean id="punktB" class="edu.spring.dreieck.xml.beanspostprocessor.Punkt">
+		<property name="x" value="2" />
+		<property name="y" value="2" />
+	</bean>
+	<bean class="edu.spring.dreieck.xml.beanspostprocessor.InitDreieckApp" />
 ```
 
 ## Project 24 HelloWorldAnnotation
@@ -92,7 +183,31 @@ The project is showing how to use the _jsr250_ and the _jsr330_ compatible annot
 
 - _MainAppHelloWorldAnnotation_: is using a SpringConfiguration class with the annotation _@Configuration_ instead of the _beans.xml_. The beans _HelloWorldService_
   and HelloWorldServiceExtended are created with the annotation _@Bean_. The class consists of a package scan annotation.
+
+```java
+@Configuration
+@ComponentScan(basePackages = "edu.spring.helloworld.annotation.prog.scan")
+public class SpringConfiguration {
+
+    @Bean(name = "helloWorldService")
+    public HelloWorldService helloWorldService(){
+    	return new HelloWorldService();
+    }
+
+    @Bean(name = "helloWorldServiceExtended")
+    public HelloWorldServiceExtended helloWorldServiceExtended() {
+    	return new HelloWorldServiceExtended();
+    }
+}
+
+```
+
 - _MainAppHellWorldXMLAnnotation_: The beans _HelloWorldService_ and _HelloWorldServiceExtended_ are defined in the _beans.xml_ file.
 ```xml
+	<context:annotation-config />
+	<context:component-scan base-package="edu.spring.helloworld.annotation.xml.scan" />
+
+	<bean id="helloWorldService" class="edu.spring.helloworld.annotation.xml.service.HelloWorldService" />
+	<bean id="helloWorldServiceExtended" class="edu.spring.helloworld.annotation.xml.service.HelloWorldServiceExtended" />
 ```
 
