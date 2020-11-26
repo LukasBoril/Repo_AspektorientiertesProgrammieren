@@ -14,23 +14,22 @@ The tutorial project shows three options on how to work with instantiate new obj
 - option 2: Benzin is created outside of _Auto_
 - option 3: using dependency injection. The beans are defined the file _resources/beans03.xml_
 ```xml
-	<bean id="A3" class="edu.spring.auto03.model.Auto">
-		<property name="name" value="A3"></property>
-		<property name="reifen">
-			<list>
-				<bean class="edu.spring.auto03.model.Reifen" />
-				<bean class="edu.spring.auto03.model.Reifen" />
-				<bean class="edu.spring.auto03.model.Reifen" />
-				<bean class="edu.spring.auto03.model.Reifen" />
-
-			</list>
-		</property>
-		<property name="motor" ref="a3_motor" />
-		<property name="kraftstoff" ref="benzin" />
-	</bean>
-	<bean id="a3_motor" class="edu.spring.auto03.model.Motor" autowire="byName" />
-	<bean id="benzin" class="edu.spring.auto03.model.fuel.Benzin" scope="prototype" />
-	<bean id="oel" class="edu.spring.auto03.model.Oel" scope="prototype" />
+   <bean id="A3" class="edu.spring.auto03.model.Auto">
+	  <property name="name" value="A3"></property>
+	  <property name="reifen">
+	  	 <list>
+			<bean class="edu.spring.auto03.model.Reifen" />
+			<bean class="edu.spring.auto03.model.Reifen" />
+			<bean class="edu.spring.auto03.model.Reifen" />
+			<bean class="edu.spring.auto03.model.Reifen" />
+		 </list>
+	  </property>
+	  <property name="motor" ref="a3_motor" />
+	  <property name="kraftstoff" ref="benzin" />
+   </bean>
+   <bean id="a3_motor" class="edu.spring.auto03.model.Motor" autowire="byName" />
+   <bean id="benzin" class="edu.spring.auto03.model.fuel.Benzin" scope="prototype" />
+   <bean id="oel" class="edu.spring.auto03.model.Oel" scope="prototype" />
 ```
 
 The bean _Auto_ is initialized with 4 beans _Reifen_, a _Motor_ bean and a _Kraftstoff_ bean.
@@ -103,7 +102,8 @@ All beans are under _resources/xml_:
 		<property name="punktA" ref="punktA" />
 	</bean>
 
-	<bean id="dreieck2" class="edu.spring.dreieck.xml.inheritance.Dreieck2" parent="dreieck">
+	<bean id="dreieck2" class="edu.spring.dreieck.xml.inheritance.Dreieck2" 
+	    parent="dreieck">
 		<property name="punktB" ref="punktB" />
 	</bean>
 
@@ -207,7 +207,9 @@ public class SpringConfiguration {
 	<context:annotation-config />
 	<context:component-scan base-package="edu.spring.helloworld.annotation.xml.scan" />
 
-	<bean id="helloWorldService" class="edu.spring.helloworld.annotation.xml.service.HelloWorldService" />
-	<bean id="helloWorldServiceExtended" class="edu.spring.helloworld.annotation.xml.service.HelloWorldServiceExtended" />
+	<bean id="helloWorldService" 
+	  class="edu.spring.helloworld.annotation.xml.service.HelloWorldService" />
+	<bean id="helloWorldServiceExtended" 
+	  class="edu.spring.helloworld.annotation.xml.service.HelloWorldServiceExtended" />
 ```
 
