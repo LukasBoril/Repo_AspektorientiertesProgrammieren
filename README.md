@@ -33,6 +33,15 @@ The _InitializingBean_ and _DisposableBean_ are explained in _Lifecyle Events_. 
 All beans are under _resources/xml_:
 
 - 01 Basics: Initialize Dreieck and Punkt individually. Link the Point into Dreick with a _ref_.
+```xml
+	<bean id="dreieck" class="edu.spring.dreieck.xml.basics.Dreieck">
+		<property name="start" ref="startPunkt"></property>
+	</bean>
+	<bean id="startPunkt" class="edu.spring.dreieck.xml.basics.Punkt">
+		<property name="x" value="0"></property>
+		<property name="y" value="1"></property>
+	</bean>
+```
 - 01 Basics inner: Initialize Dreieck and Punkt all together in Dreieck.
 - 02 Collection: Initialize Dreieck and Punkt as a list.
 - 04 Inheritance: Inherit a second point and initialize it with a different point.
@@ -47,5 +56,5 @@ The project is showing how to use the _jsr250_ and the _jsr330_ compatible annot
 
 - _MainAppHelloWorldAnnotation_: is using a SpringConfiguration class with the annotation _@Configuration_ instead of the _beans.xml_. The beans _HelloWorldService_
   and HelloWorldServiceExtended are created with the annotation _@Bean_. The class consists of a package scan annotation.
-- _MainAppHellWorldXMLAnnotation_: The beans _HelloWorldService_ and _HelloWorldServiceExtended_ are defined int _beans.xml_ file.
+- _MainAppHellWorldXMLAnnotation_: The beans _HelloWorldService_ and _HelloWorldServiceExtended_ are defined in the _beans.xml_ file.
 
