@@ -4,6 +4,14 @@ public class Punkt {
 	private int x;
 	private int y;
 
+	public Punkt() {
+	}
+
+	public Punkt(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
 	public int getX() {
 		return x;
 	}
@@ -20,5 +28,5 @@ public class Punkt {
 	public String toString() {
 		return "Punkt [x=" + x + ", y=" + y + "]";
 	}
-	
+
 }
